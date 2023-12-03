@@ -10,28 +10,24 @@
       method: :post, 
       class: "space-y-4", 
       data: {
-        controller: "password-strength", 
-        password_strength_required_length_value: 12,
-        password_strength_require_lowercase_letter_value: true,
-        password_strength_require_uppercase_letter_value: true,
-        password_strength_require_symbol_value: true,
-        password_strength_require_number_value: true,
-        password_strength_allow_identical_characters_value: false,
-        password_strength_allow_sequential_characters_value: false 
+        controller: "autosave", 
+        autosave_target: "form", 
+        action: "turbo:submit-end->autosave#success turbo:fetch-request-error->autosave#error"
       } do |f| %>
+      <div data-autosave-target="status" class="hidden"></div>
       <div>
         <%= f.label :email, class: "block text-sm font-medium leading-6 text-white" %>
         <div class="mt-2">
-          <%= f.email_field :email, class: "block px-2 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6", required: true %>
+          <%= f.email_field :email, class: "block px-2 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6" %>
         </div>
       </div>
 
       <div>
         <%= f.label :password, class: "block text-sm font-medium leading-6 text-white" %>
         <div class="mt-2">
-          <%= f.password_field :password, class: "block px-2 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6", required: true, data: { password_strength_target: "password", action: "input->password-strength#validate" } %>
+          <%= f.password_field :password, class: "block px-2 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6", data: { password_strength_target: "password", action: "input->autosave#save" } %>
         </div>
-        <div data-password-strength-target="feedback" class="hidden mt-4 bg-gray-800 p-2 space-y-2"></div>
+        <%= render "password_feedback", user: f.object.tap(&:valid?) %>
       </div>
 
       <div>
