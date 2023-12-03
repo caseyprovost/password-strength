@@ -10,7 +10,7 @@ class Users::RegistrationsController < ApplicationController
       if @user.save
         format.turbo_stream {
           flash[:notice] = "You successfully signed up"
-          redirect_to dashboard_controller, status: :see_other
+          redirect_to new_users_registration_path, status: :see_other
         }
       else
         format.turbo_stream {}

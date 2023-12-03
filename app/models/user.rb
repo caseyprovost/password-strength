@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   has_secure_password validations: false
 
-  validates :email, presence: true
+  validates :email, :name, presence: true
   validates :password, length: {minimum: REQUIRED_PASSWORD_LENGTH, message: LENGTH_MESSAGE}
   validates :password, format: {with: /[a-z]/, message: LOWERCASE_MESSAGE}
   validates :password, format: {with: /[A-Z]/, message: UPPERCASE_MESSAGE}

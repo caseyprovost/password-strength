@@ -16,6 +16,13 @@
       } do |f| %>
       <div data-autosave-target="status" class="hidden"></div>
       <div>
+        <%= f.label :name, class: "block text-sm font-medium leading-6 text-white" %>
+        <div class="mt-2">
+          <%= f.text_field :name, class: "block px-2 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6" %>
+        </div>
+      </div>
+
+      <div>
         <%= f.label :email, class: "block text-sm font-medium leading-6 text-white" %>
         <div class="mt-2">
           <%= f.email_field :email, class: "block px-2 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6" %>
